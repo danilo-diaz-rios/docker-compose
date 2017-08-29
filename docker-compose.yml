@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  drupal:
+    image: 'bitnami/drupal:latest'
+    ports:
+      - '3000:80'
+      - '443:443'
+    volumes:
+      - 'drupal_data:/bitnami'
+    depends_on:
+      - mariadb
+      
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'mariadb_data:/bitnami'
+
+
+
+volumes:
+  mariadb_data:
+    driver: local
+  drupal_data:
+    driver: local
